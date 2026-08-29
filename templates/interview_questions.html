@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+
+            <h3 class="mb-0">
+
+                🎤 {{ skill }} Interview Questions
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            {% for q in questions %}
+
+            <div class="card mb-4 border-warning">
+
+                <div class="card-body">
+
+                    <h5>
+
+                        Question {{ loop.index }}
+
+                    </h5>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>❓ Question</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ q.question }}
+
+                    </p>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>✅ Answer</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ q.answer }}
+
+                    </p>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>💡 Tip</strong>
+
+                    </p>
+
+                    <p>
+
+                        {{ q.tip }}
+
+                    </p>
+
+                    <hr>
+
+                    <p>
+
+                        <strong>🔄 Follow-up Questions</strong>
+
+                    </p>
+
+                    <ul>
+
+                        {% for f in q.follow_up %}
+
+                        <li>{{ f }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

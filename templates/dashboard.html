@@ -1,0 +1,746 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Welcome -->
+    <div class="row mb-4">
+
+        <div class="col-12">
+
+            <div class="card border-0 shadow-lg p-4">
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                    <div>
+
+                        <h2 class="fw-bold mb-2" style="color:#ffffff;">
+                            👋 Welcome Back,
+                            <span class="text-primary">
+                                {{ session["user_name"] }}
+                            </span>
+                        </h2>
+
+                        <p class="text-secondary mb-0">
+                            Track your career growth with AI-powered insights.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-primary fs-6 px-3 py-2">
+                        AI Career Dashboard
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Stats -->
+
+    <div class="row g-4">
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 text-primary mb-3">
+                        <i class="bi bi-file-earmark-check-fill"></i>
+                    </div>
+
+                    <h6 class="text-secondary">
+                        Resume Score
+                    </h6>
+
+                    <h2 class="fw-bold">
+                        {{ resume.ats_score }}%
+                    </h2>
+
+                    <small class="text-success">
+                        Latest ATS Score
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 text-success mb-3">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <h6 class="text-secondary">
+                        Career Goal
+                    </h6>
+
+                    <h4 class="fw-bold">
+                        {{ resume.career_goal }}
+                    </h4>
+
+                    <small class="text-info">
+                        AI Predicted Career
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 text-warning mb-3">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+
+                    <h6 class="text-secondary">
+                        Skills Identified
+                    </h6>
+
+                    <h2 class="fw-bold">
+                        {{ resume.skills_count }}
+                    </h2>
+
+                    <small class="text-warning">
+                        Skills Extracted
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 text-info mb-3">
+                        <i class="bi bi-cloud-check-fill"></i>
+                    </div>
+
+                    <h6 class="text-secondary">
+                        Resume Status
+                    </h6>
+
+                    <h4 class="fw-bold">
+                        {{ resume.resume_status }}
+                    </h4>
+
+                    <small class="text-success">
+                        Latest Resume Status
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+
+    <div class="row mt-4 g-4">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+
+						<h4 class="fw-bold mb-0">
+						    📊 Resume Quality Analysis
+						</h4>
+
+						<span class="badge bg-primary">
+						    Live Analysis
+						</span>
+
+                    </div>
+
+                    <div style="position:relative;height:320px;">
+
+                        <canvas id="resumeChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-lg">
+
+                <div class="card-body">
+
+					<h4 class="fw-bold">
+					    🎯 Next Best Actions
+					</h4>
+
+                    <hr>
+
+					<span class="badge bg-primary mb-3">
+					    Personalized
+					</span>
+
+                    {% if suggestions %}
+
+                    <ul class="list-group list-group-flush">
+
+                        {% for suggestion in suggestions[:5] %}
+
+                        <li class="list-group-item bg-transparent border-secondary">
+                            ✅ {{ suggestion }}
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% else %}
+
+                    <div class="alert alert-success mt-3">
+                        🎉 Excellent! Your resume looks good.
+                    </div>
+
+                    {% endif %}
+
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+        <!-- Activity & Tasks -->
+
+		<div class="row mt-4 g-4">
+
+
+		    <!-- Upcoming Tasks -->
+
+		    <div class="col-12">
+
+		        <div class="card border-0 shadow-lg h-100">
+
+					<div class="card-body p-4">
+
+						<div class="d-flex justify-content-between align-items-center mb-4">
+
+						    <h4 class="fw-bold mb-0">
+						        🚀 AI Learning Roadmap
+						    </h4>
+
+						    <span class="badge bg-primary px-3 py-2">
+						        {{ tasks|length }} Tasks
+						    </span>
+
+						</div>
+
+					    {% if tasks %}
+
+					        {% for task in tasks %}
+
+					        <div class="d-flex align-items-center justify-content-between mb-3">
+
+					            <div class="form-check">
+
+					                <input
+					                    class="form-check-input task-checkbox"
+					                    type="checkbox"
+					                    data-id="{{ task.id }}"
+					                    {% if task.completed %}checked{% endif %}
+					                >
+
+					                <label class="form-check-label">
+
+					                    {{ task.title }}
+
+					                </label>
+
+					            </div>
+
+								<button
+								    class="btn btn-primary learn-btn"
+								    data-task="{{ task.id }}">
+
+								    Learn
+
+								</button>
+
+					        </div>
+
+					        {% endfor %}
+
+					    {% else %}
+
+					        <div class="alert alert-warning">
+
+					            No AI tasks generated.
+
+					        </div>
+
+					    {% endif %}
+
+					</div>
+
+		        </div>
+
+		    </div>
+
+		</div>
+
+    </div>
+	
+	<!-- ==========================================
+	     AI Learning Mentor Modal
+	========================================== -->
+
+	<div class="modal fade"
+	     id="learningModal"
+	     tabindex="-1">
+
+	    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+	        <div class="modal-content bg-dark text-light border-secondary">
+
+	            <div class="modal-header">
+
+	                <h3 id="planTitle" class="modal-title">
+	                    AI Learning Mentor
+	                </h3>
+
+	                <button
+	                    class="btn-close btn-close-white"
+	                    data-bs-dismiss="modal">
+	                </button>
+
+	            </div>
+
+	            <div class="modal-body">
+
+	                <!-- Loading -->
+
+	                <div id="loadingArea"
+	                     class="text-center py-5">
+
+	                    <div class="spinner-border text-primary mb-3"></div>
+
+	                    <h5>
+	                        AI is creating your personalized learning roadmap...
+	                    </h5>
+
+	                </div>
+
+	                <!-- Content -->
+
+	                <div id="planContent"
+	                     style="display:none;">
+
+	                    <div class="row mb-4">
+
+	                        <div class="col-md-4">
+
+	                            <div class="card bg-secondary">
+
+	                                <div class="card-body">
+
+	                                    <h6>⭐ Difficulty</h6>
+
+	                                    <p id="difficulty"></p>
+
+	                                </div>
+
+	                            </div>
+
+	                        </div>
+
+	                        <div class="col-md-4">
+
+	                            <div class="card bg-secondary">
+
+	                                <div class="card-body">
+
+	                                    <h6>⏱ Duration</h6>
+
+	                                    <p id="duration"></p>
+
+	                                </div>
+
+	                            </div>
+
+	                        </div>
+
+	                        <div class="col-md-4">
+
+	                            <div class="card bg-secondary">
+
+	                                <div class="card-body">
+
+	                                    <h6>🚀 Career Impact</h6>
+
+	                                    <p id="careerImpact"></p>
+
+	                                </div>
+
+	                            </div>
+
+	                        </div>
+
+	                    </div>
+
+	                    <h5>📖 Description</h5>
+
+	                    <p id="description"></p>
+
+	                    <hr>
+
+	                    <h5>💻 Mini Project</h5>
+
+	                    <p id="miniProject"></p>
+
+	                    <hr>
+
+	                    <h5>🛣 Learning Roadmap</h5>
+
+	                    <ol id="roadmapList"></ol>
+
+	                    <hr>
+
+	                    <h5>🔗 Free Resources</h5>
+
+	                    <div id="resourceList"></div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</div>
+
+    {% endblock %}
+
+    {% block scripts %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const canvas = document.getElementById("resumeChart");
+
+        if (!canvas) return;
+
+        if (window.resumeChart instanceof Chart) {
+
+            window.resumeChart.destroy();
+
+        }
+
+        window.resumeChart = new Chart(canvas, {
+
+            type: "line",
+
+            data: {
+
+				labels: [
+				    "ATS Score",
+				    "Job Match",
+				    "Technical Skills",
+				    "Projects",
+				    "Resume Completeness"
+				],
+
+                datasets: [
+
+                    {
+
+                        label: "Progress",
+
+						data: [
+						    {{ resume.ats_score }},
+						    {{ job_match }},
+						    {{ skill_score }},
+						    {{ project_score }},
+						    {{ resume_completeness }}
+						],
+
+                        borderColor: "#3B82F6",
+
+                        backgroundColor: "rgba(59,130,246,.15)",
+
+                        fill: true,
+
+                        tension: 0.4,
+
+                        borderWidth: 3,
+
+                        pointRadius: 5,
+
+                        pointHoverRadius: 7
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: true,
+
+                aspectRatio: 2,
+
+                animation: {
+
+                    duration: 800
+
+                },
+
+				plugins: {
+
+				    legend: {
+				        display: false
+				    },
+
+				    tooltip: {
+
+				        callbacks: {
+
+				            label: function(context) {
+
+				                return context.parsed.y + "%";
+
+				            }
+
+				        }
+
+				    }
+
+				},
+
+                scales: {
+
+                    x: {
+
+                        ticks: {
+
+                            color: "#CBD5E1"
+
+                        },
+
+                        grid: {
+
+                            color: "rgba(255,255,255,.06)"
+
+                        }
+
+                    },
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        max: 100,
+
+                        ticks: {
+
+                            stepSize: 20,
+
+                            color: "#CBD5E1"
+
+                        },
+
+                        grid: {
+
+                            color: "rgba(255,255,255,.06)"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    });
+
+    </script>
+	<script>
+
+	document.querySelectorAll(".task-checkbox").forEach(function(box){
+
+	    box.addEventListener("change", function(){
+
+	        fetch("/update-task",{
+
+	            method:"POST",
+
+	            headers:{
+	                "Content-Type":"application/x-www-form-urlencoded"
+	            },
+
+	            body:
+
+	                "task_id="+this.dataset.id+
+
+	                "&completed="+this.checked
+
+	        });
+
+	    });
+
+	});
+
+	</script>
+	<script>
+
+	const modal = new bootstrap.Modal(
+	    document.getElementById("learningModal")
+	);
+
+	document.querySelectorAll(".learn-btn").forEach(button => {
+
+	    button.addEventListener("click", async function () {
+
+	        const taskId = this.dataset.task;
+
+	        document.getElementById("loadingArea").style.display = "block";
+	        document.getElementById("planContent").style.display = "none";
+
+	        modal.show();
+
+	        try {
+
+	            const response = await fetch(`/task/${taskId}`);
+
+	            if (!response.ok) {
+	                throw new Error("Server returned " + response.status);
+	            }
+
+	            const plan = await response.json();
+
+	            console.log("PLAN:", plan);
+
+	            document.getElementById("planTitle").textContent =
+	                plan.title || "Learning Plan";
+
+	            document.getElementById("difficulty").textContent =
+	                plan.difficulty || "-";
+
+	            document.getElementById("duration").textContent =
+	                plan.duration || "-";
+
+	            document.getElementById("careerImpact").textContent =
+	                plan.career_impact || "-";
+
+	            document.getElementById("description").textContent =
+	                plan.description || "-";
+
+	            document.getElementById("miniProject").textContent =
+	                plan.mini_project || "-";
+
+	            const roadmap = document.getElementById("roadmapList");
+	            roadmap.innerHTML = "";
+
+	            if (Array.isArray(plan.roadmap)) {
+
+	                plan.roadmap.forEach(step => {
+
+	                    const li = document.createElement("li");
+	                    li.textContent = step;
+	                    roadmap.appendChild(li);
+
+	                });
+
+	            }
+
+	            const resources = document.getElementById("resourceList");
+	            resources.innerHTML = "";
+
+	            if (Array.isArray(plan.resources)) {
+
+	                plan.resources.forEach(resource => {
+
+	                    resources.innerHTML += `
+	                        <div class="card bg-secondary mb-2">
+	                            <div class="card-body">
+	                                <a
+	                                    href="${resource.url}"
+	                                    target="_blank"
+	                                    class="text-white text-decoration-none">
+
+	                                    ${resource.name}
+
+	                                </a>
+	                            </div>
+	                        </div>
+	                    `;
+
+	                });
+
+	            }
+
+	            document.getElementById("loadingArea").style.display = "none";
+	            document.getElementById("planContent").style.display = "block";
+
+	        }
+
+	        catch (error) {
+
+	            console.error(error);
+
+	            document.getElementById("loadingArea").innerHTML = `
+	                <div class="alert alert-danger">
+	                    <h5>Error Loading Learning Plan</h5>
+	                    <p>${error.message}</p>
+	                </div>
+	            `;
+
+	        }
+
+	    });
+
+	});
+
+	</script>
+
+    {% endblock %}

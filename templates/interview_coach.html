@@ -1,0 +1,189 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+AI Interview Coach
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>🎤 AI Interview Coach</h2>
+
+    <p class="text-muted">
+        Prepare for interviews using AI-generated questions based on your resume.
+    </p>
+
+    <hr>
+
+	{% if interview_result %}
+
+	<div class="card shadow-sm mb-4">
+
+	    <div class="card-header bg-primary text-white">
+	        👨‍💼 HR Interview Questions
+	    </div>
+
+	    <div class="card-body">
+
+	        <ol>
+
+	            {% for question in interview_result.hr_questions %}
+	                <li class="mb-2">{{ question }}</li>
+	            {% endfor %}
+
+	        </ol>
+
+	    </div>
+
+	</div>
+
+	<div class="card shadow-sm mb-4">
+
+	    <div class="card-header bg-success text-white">
+	        📄 Resume-Based Questions
+	    </div>
+		
+
+	    <div class="card-body">
+
+	        <ol>
+
+	            {% for question in interview_result.resume_questions %}
+	                <li class="mb-2">{{ question }}</li>
+	            {% endfor %}
+
+	        </ol>
+
+	    </div>
+
+	</div>
+	<div class="card shadow-sm mb-4">
+
+	    <div class="card-header bg-warning">
+	        🚀 Project-Based Interview Questions
+	    </div>
+
+	    <div class="card-body">
+
+	        {% for project, questions in interview_result.project_questions.items() %}
+
+	        <div class="card mb-3">
+
+	            <div class="card-header bg-light">
+
+	                <strong>{{ project }}</strong>
+
+	            </div>
+
+	            <div class="card-body">
+
+	                <ol>
+
+	                    {% for question in questions %}
+
+	                    <li class="mb-2">
+
+	                        {{ question }}
+
+	                    </li>
+
+	                    {% endfor %}
+
+	                </ol>
+
+	            </div>
+
+	        </div>
+
+	        {% endfor %}
+
+	    </div>
+
+	</div>
+	<div class="card shadow-sm mb-4">
+
+	    <div class="card-header bg-info text-white">
+	        💻 Technology-Based Questions
+	    </div>
+
+	    <div class="card-body">
+
+	        {% for tech, questions in interview_result.technology_questions.items() %}
+
+	        <div class="card mb-3">
+
+	            <div class="card-header bg-light">
+
+	                <strong>{{ tech }}</strong>
+
+	            </div>
+
+	            <div class="card-body">
+
+	                <ol>
+
+	                    {% for question in questions %}
+
+	                    <li class="mb-2">
+	                        {{ question }}
+	                    </li>
+
+	                    {% endfor %}
+
+	                </ol>
+
+	            </div>
+
+	        </div>
+
+	        {% endfor %}
+
+	    </div>
+
+	</div>
+	<div class="card shadow-sm mb-4">
+
+	    <div class="card-header bg-secondary text-white">
+	        📚 Core Subject Questions
+	    </div>
+
+	    <div class="card-body">
+
+	        {% for subject, questions in interview_result.core_subject_questions.items() %}
+
+	        <div class="card mb-3">
+
+	            <div class="card-header bg-light">
+	                <strong>{{ subject }}</strong>
+	            </div>
+
+	            <div class="card-body">
+
+	                <ol>
+
+	                    {% for question in questions %}
+
+	                    <li class="mb-2">
+	                        {{ question }}
+	                    </li>
+
+	                    {% endfor %}
+
+	                </ol>
+
+	            </div>
+
+	        </div>
+
+	        {% endfor %}
+
+	    </div>
+
+	</div>
+
+	{% endif %}
+
+</div>
+
+{% endblock %}

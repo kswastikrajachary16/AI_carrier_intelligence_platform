@@ -1,0 +1,378 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+Job Finder
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+
+        <div class="col-12">
+
+            <div class="card border-0 shadow-lg p-4">
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                    <div>
+
+                        <h2 class="fw-bold text-white mb-2">
+                            💼 AI Job Finder
+                        </h2>
+
+                        <p class="text-secondary mb-0">
+                            Find AI-recommended jobs that match your skills and career goals.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-primary fs-6 px-3 py-2">
+
+                        Live Jobs
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="card search-box border-0 shadow-lg mb-4">
+
+        <div class="card-body">
+
+            <form method="GET" action="{{ url_for('jobs') }}">
+
+                <div class="row g-3">
+
+                    <div class="col-lg-10">
+
+                        <input
+                                type="text"
+                                name="query"
+                                class="form-control form-control-lg"
+                                placeholder="Search jobs (Example: Python Developer)"
+                                value="{{ query }}">
+
+                    </div>
+
+                    <div class="col-lg-2 d-grid">
+
+                        <button class="btn btn-primary btn-lg">
+
+                            <i class="bi bi-search me-2"></i>
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {% if error %}
+
+    <div class="alert alert-danger">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+    {% if jobs %}
+
+    <div class="row">
+
+        {% for job in jobs %}
+
+        <div class="col-xl-6 col-lg-6 mb-4">
+
+            <div class="card job-card border-0 shadow-lg h-100">
+
+                <div class="card-body">
+
+                    <!-- Header -->
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h4 class="fw-bold text-white">
+
+                                {{ job.job_title }}
+
+                            </h4>
+
+                            <h6 class="text-info">
+
+                                {{ job.employer_name }}
+
+                            </h6>
+
+                        </div>
+
+                        {% if job.employer_logo %}
+
+                        <img
+                                src="{{ job.employer_logo }}"
+                                width="60"
+                                height="60"
+                                class="rounded bg-white p-1">
+
+                        {% endif %}
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <i class="bi bi-geo-alt-fill text-primary"></i>
+
+                            {{ job.job_location }}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <i class="bi bi-clock-fill text-warning"></i>
+
+                            {{ job.job_posted_at }}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <i class="bi bi-building text-success"></i>
+
+                            {{ job.job_employment_type }}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            {% if job.job_is_remote %}
+
+                            <span class="badge bg-success">
+
+                                Remote
+
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-warning text-dark">
+
+                                On Site
+
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% if job.job_description %}
+					<div class="mb-3">
+
+					    <p class="text-secondary">
+
+					        {{ job.job_description[:250] }}...
+
+					    </p>
+
+					</div>
+
+					{% endif %}
+
+					<!-- Salary -->
+
+					{% if job.job_min_salary or job.job_max_salary %}
+
+					<div class="mb-3">
+
+					    <span class="badge bg-success me-2">
+
+					        💰
+
+					        {% if job.job_min_salary %}
+
+					            {{ job.job_min_salary }}
+
+					        {% endif %}
+
+					        {% if job.job_max_salary %}
+
+					            - {{ job.job_max_salary }}
+
+					        {% endif %}
+
+					        {% if job.job_salary_currency %}
+
+					            {{ job.job_salary_currency }}
+
+					        {% endif %}
+
+					    </span>
+
+					</div>
+
+					{% endif %}
+
+					<!-- Highlights -->
+
+					<div class="mb-3">
+
+					    {% if job.job_is_remote %}
+
+					    <span class="badge bg-success me-2">
+
+					        Remote
+
+					    </span>
+
+					    {% endif %}
+
+					    {% if job.job_employment_type %}
+
+					    <span class="badge bg-info text-dark me-2">
+
+					        {{ job.job_employment_type }}
+
+					    </span>
+
+					    {% endif %}
+
+					    {% if job.job_city %}
+
+					    <span class="badge bg-secondary">
+
+					        {{ job.job_city }}
+
+					    </span>
+
+					    {% endif %}
+
+					</div>
+
+					<hr>
+
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+					    {% if job.job_google_link %}
+
+					    <a
+					        href="{{ job.job_google_link }}"
+					        target="_blank"
+					        class="btn btn-outline-primary">
+
+					        <i class="bi bi-eye-fill me-2"></i>
+
+					        View Details
+
+					    </a>
+
+					    {% endif %}
+
+					    <a
+					        href="{{ job.job_apply_link }}"
+					        target="_blank"
+					        class="btn btn-success">
+
+					        <i class="bi bi-box-arrow-up-right me-2"></i>
+
+					        Apply Now
+
+					    </a>
+
+					</div>
+
+					</div>
+
+					</div>
+
+					</div>
+
+					{% endfor %}
+
+					</div>
+
+					{% elif query %}
+
+					<div class="card border-0 shadow-lg">
+
+					    <div class="card-body text-center py-5">
+
+					        <i class="bi bi-search display-3 text-warning"></i>
+
+					        <h3 class="mt-3">
+
+					            No Jobs Found
+
+					        </h3>
+
+					        <p class="text-secondary">
+
+					            Try another keyword like
+
+					            <strong>Python Developer</strong>,
+
+					            <strong>Data Scientist</strong>,
+
+					            <strong>AI Engineer</strong>,
+
+					            <strong>ML Engineer</strong>
+
+					        </p>
+
+					    </div>
+
+					</div>
+
+					{% else %}
+
+					<div class="card border-0 shadow-lg">
+
+					    <div class="card-body text-center py-5">
+
+					        <i class="bi bi-briefcase-fill display-2 text-primary"></i>
+
+					        <h3 class="mt-4">
+
+					            Search Jobs with AI
+
+					        </h3>
+
+					        <p class="text-secondary">
+
+					            Enter a role above to discover live opportunities from multiple companies.
+
+					        </p>
+
+					    </div>
+
+					</div>
+
+					{% endif %}
+
+					</div>
+
+					{% endblock %}

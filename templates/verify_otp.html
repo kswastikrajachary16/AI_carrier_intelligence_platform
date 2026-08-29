@@ -1,0 +1,164 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+Verify OTP
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-lg border-0"
+                 style="
+                    background:#1e293b;
+                    border-radius:20px;
+                    overflow:hidden;
+                 ">
+
+                <!-- Header -->
+
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="text-center mb-4">
+
+                        <div
+                            style="
+                                width:70px;
+                                height:70px;
+                                margin:auto;
+                                border-radius:50%;
+                                background:#2563eb;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                font-size:30px;
+                            "
+                        >
+                            🔐
+                        </div>
+
+                        <h2 class="text-white fw-bold mt-4">
+
+                            Verify OTP
+
+                        </h2>
+
+                        <p style="color:#94a3b8;">
+
+                            Enter the 6-digit OTP sent to your email.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Flash Messages -->
+
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+
+                        {% if messages %}
+
+                            {% for category, message in messages %}
+
+                                <div
+                                    class="alert alert-{{ category }}"
+                                    role="alert"
+                                >
+
+                                    {{ message }}
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                    {% endwith %}
+
+
+                    <!-- OTP Form -->
+
+                    <form method="POST"
+                          action="{{ url_for('verify_otp') }}">
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label text-white"
+                            >
+                                Enter OTP
+                            </label>
+
+                            <input
+                                type="text"
+                                name="otp"
+                                class="form-control form-control-lg text-center"
+                                placeholder="Enter 6-digit OTP"
+                                maxlength="6"
+                                pattern="[0-9]{6}"
+                                inputmode="numeric"
+                                autocomplete="one-time-code"
+                                required
+                                style="
+                                    background:#0f172a;
+                                    color:white;
+                                    border:1px solid #334155;
+                                    border-radius:12px;
+                                    letter-spacing:8px;
+                                    font-size:22px;
+                                    font-weight:600;
+                                "
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-lg w-100"
+                            style="border-radius:12px;"
+                        >
+
+                            <i class="bi bi-shield-check me-2"></i>
+
+                            Verify OTP
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- Back -->
+
+                    <div class="text-center mt-4">
+
+                        <a
+                            href="{{ url_for('forgot_password') }}"
+                            style="
+                                color:#60a5fa;
+                                text-decoration:none;
+                            "
+                        >
+
+                            Didn't receive the OTP?
+                            Request a new one
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+Resume Chat
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>💬 Resume Chat</h2>
+
+    <p class="text-muted">
+        Ask anything about your resume.
+    </p>
+
+    <hr>
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <textarea
+                class="form-control"
+                name="question"
+                rows="3"
+                placeholder="Example: Summarize my resume"
+                required></textarea>
+
+        </div>
+
+        <button class="btn btn-primary">
+            Ask AI
+        </button>
+
+    </form>
+
+	{% if chat_history %}
+
+	{% for message in chat_history|reverse %}
+
+	<div class="card mt-3 {% if message.role=='user' %}border-primary{% else %}border-success{% endif %}">
+
+	    <div class="card-header {% if message.role=='user' %}bg-primary{% else %}bg-success{% endif %} text-white">
+
+	        {% if message.role=="user" %}
+	            👤 You
+	        {% else %}
+	            🤖 CareerPilot AI
+	        {% endif %}
+
+	    </div>
+
+	    <div class="card-body">
+
+	        <pre style="white-space:pre-wrap;font-family:inherit;">{{ message.content }}</pre>
+
+	    </div>
+
+	</div>
+
+	{% endfor %}
+
+	{% endif %}
+
+</div>
+
+{% endblock %}

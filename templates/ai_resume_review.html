@@ -1,0 +1,170 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Header -->
+    <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-robot fs-1 text-primary me-3"></i>
+        <div>
+            <h2 class="fw-bold mb-0">AI Resume Review</h2>
+            <small class="text-secondary">
+                Comprehensive AI-powered resume evaluation
+            </small>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="fw-bold text-primary mb-3">
+                <i class="bi bi-file-earmark-text-fill me-2"></i>
+                Resume Summary
+            </h5>
+
+			<p class="mb-0 text-white">
+			    {{ review.summary }}
+			</p>
+
+        </div>
+    </div>
+
+    <!-- Strengths & Weaknesses -->
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold text-success mb-3">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        Strengths
+                    </h5>
+
+                    <ul class="mb-0">
+
+                        {% for item in review.strengths %}
+
+                        <li class="mb-2">{{ item }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold text-warning mb-3">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Weaknesses
+                    </h5>
+
+                    <ul class="mb-0">
+
+                        {% for item in review.weaknesses %}
+
+                        <li class="mb-2">{{ item }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Suggestions & Missing Skills -->
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold text-info mb-3">
+                        <i class="bi bi-lightbulb-fill me-2"></i>
+                        Suggestions
+                    </h5>
+
+                    <ul class="mb-0">
+
+                        {% for item in review.suggestions %}
+
+                        <li class="mb-2">{{ item }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold text-danger mb-3">
+                        <i class="bi bi-tools me-2"></i>
+                        Missing Skills
+                    </h5>
+
+                    {% for item in review.missing_skills %}
+
+                    <span class="badge bg-danger-subtle text-danger border border-danger me-2 mb-2 px-3 py-2">
+                        {{ item }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Final Verdict -->
+    <div class="card shadow border-0 rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-bold text-primary mb-3">
+                <i class="bi bi-stars me-2"></i>
+                AI Final Verdict
+            </h5>
+
+			<p class="fs-5 text-white mb-0 lh-lg">
+			    {{ review.final_verdict }}
+			</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

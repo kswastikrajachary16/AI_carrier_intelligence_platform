@@ -1,0 +1,556 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Career Intelligence Platform
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+
+    <div class="container">
+        <div class="row align-items-center py-5 hero-row">
+
+            <!-- LEFT: HERO CONTENT -->
+            <div class="col-lg-6 hero-copy">
+
+                <div class="hero-eyebrow">
+                    <span class="hero-eyebrow-dot"></span>
+                    AI-POWERED CAREER PLATFORM
+                </div>
+
+                <h1 class="hero-title">
+                    Build Smarter Careers
+                    <span>with AI.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Upload your resume, receive an ATS score, discover skill gaps,
+                    prepare for interviews, and get personalized career guidance
+                    using Artificial Intelligence.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="/register"
+                       class="btn btn-primary btn-lg hero-primary-btn">
+                        Start Free
+                    </a>
+
+                    <a href="#demo"
+                       class="btn btn-outline-light btn-lg hero-demo-btn">
+                        <i class="bi bi-play-circle me-2"></i>
+                        Watch Demo
+                    </a>
+                </div>
+
+                <div class="hero-trust">
+                    <span><i class="bi bi-check-circle-fill"></i> Resume Analysis</span>
+                    <span><i class="bi bi-check-circle-fill"></i> AI Career Guidance</span>
+                    <span><i class="bi bi-check-circle-fill"></i> Job Finder</span>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: PRODUCT DEMO -->
+            <div class="col-lg-6 hero-visual">
+
+                <div class="demo-window" id="demo">
+
+                    <div class="demo-window-bar">
+                        <div class="demo-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="demo-window-title">
+                            AI Career Intelligence Platform
+                        </span>
+                    </div>
+
+                    <div class="demo-video-wrap">
+
+                        <!--
+                            Put your demo video at:
+                            static/videos/platform-demo.mp4
+
+                            Optional poster:
+                            static/images/platform-demo-poster.jpg
+                        -->
+                        <video
+                            class="demo-video"
+                            controls
+                            preload="metadata"
+                            poster="{{ url_for('static', filename='images/platform-demo-poster.jpg') }}"
+                        >
+                            <source
+                                src="{{ url_for('static', filename='videos/platform-demo.mp4') }}"
+                                type="video/mp4"
+                            >
+                            Your browser does not support HTML5 video.
+                        </video>
+
+                        <div class="demo-video-overlay">
+                            <div class="demo-play">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                            <span>Watch a short platform demo</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Floating feature cards -->
+                <div class="floating-card floating-card-score">
+                    <div class="floating-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div>
+                        <small>ATS Score</small>
+                        <strong>92%</strong>
+                    </div>
+                </div>
+
+                <div class="floating-card floating-card-ai">
+                    <div class="floating-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+                    <div>
+                        <small>AI Career Match</small>
+                        <strong>Excellent</strong>
+                    </div>
+                </div>
+
+                <div class="floating-card floating-card-job">
+                    <div class="floating-icon">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                    <div>
+                        <small>Job Finder</small>
+                        <strong>Explore Jobs</strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- FEATURES -->
+
+<section id="features" class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold display-5">
+
+                Everything You Need
+                <span class="text-primary">For Your Career</span>
+
+            </h2>
+
+            <p class="text-secondary">
+
+                AI tools designed to help students and job seekers.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-file-earmark-text display-5 text-primary"></i>
+
+                    <h4 class="mt-3">
+                        Resume Analysis
+                    </h4>
+
+                    <p>
+
+                        AI-powered resume parsing,
+                        ATS score and improvement suggestions.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-graph-up-arrow display-5 text-primary"></i>
+
+                    <h4 class="mt-3">
+
+                        Career Prediction
+
+                    </h4>
+
+                    <p>
+
+                        Predict the most suitable
+                        career path from your skills.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-chat-dots display-5 text-primary"></i>
+
+                    <h4 class="mt-3">
+
+                        Interview Coach
+
+                    </h4>
+
+                    <p>
+
+                        Prepare with AI-generated
+                        interview questions and guidance.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- WHY CHOOSE US -->
+
+<section class="why-choose-section py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <!-- LEFT: ANIMATED PRODUCT VISUAL -->
+
+            <div class="col-lg-6">
+
+                <div class="why-visual">
+
+                    <div class="why-glow"></div>
+
+                    <div class="mini-dashboard">
+
+                        <div class="mini-dashboard-header">
+                            <div>
+                                <span class="mini-label">AI CAREER DASHBOARD</span>
+                                <h5>Career Intelligence</h5>
+                            </div>
+
+                            <span class="mini-live">
+                                <span></span> Live
+                            </span>
+                        </div>
+
+                        <div class="mini-score-row">
+
+                            <div class="mini-score-card">
+                                <span>ATS Score</span>
+                                <strong>92</strong>
+                                <small>/100</small>
+
+                                <div class="score-progress">
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <div class="mini-score-card">
+                                <span>Job Match</span>
+                                <strong>87</strong>
+                                <small>%</small>
+
+                                <div class="score-progress match">
+                                    <span></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mini-analysis">
+
+                            <div class="mini-analysis-title">
+                                <span>AI Resume Analysis</span>
+                                <span class="mini-status">Completed</span>
+                            </div>
+
+                            <div class="analysis-line">
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="analysis-line short">
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="analysis-line">
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="mini-skills">
+
+                                <span>Python</span>
+                                <span>AI / ML</span>
+                                <span>SQL</span>
+                                <span>Flask</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Floating cards -->
+
+                    <div class="why-floating-card why-card-top">
+
+                        <div class="why-card-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <div>
+                            <small>AI Analysis</small>
+                            <strong>Completed</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="why-floating-card why-card-bottom">
+
+                        <div class="why-card-icon">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+
+                        <div>
+                            <small>Career Match</small>
+                            <strong>Excellent</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT: CONTENT -->
+
+            <div class="col-lg-6">
+
+                <span class="why-badge">
+                    Why Choose Us
+                </span>
+
+                <h2 class="why-title">
+                    Everything in One
+                    <span>Platform</span>
+                </h2>
+
+                <p class="why-description">
+                    No more switching between resume checkers, ATS analyzers,
+                    interview platforms and career guidance websites.
+                </p>
+
+
+                <div class="why-features">
+
+                    <div class="why-feature">
+
+                        <div class="why-feature-icon">
+                            <i class="bi bi-file-earmark-check"></i>
+                        </div>
+
+                        <div>
+                            <h5>AI Resume Analysis</h5>
+
+                            <p>
+                                Analyze your resume instantly using AI.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="why-feature">
+
+                        <div class="why-feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+
+                        <div>
+                            <h5>Career Prediction</h5>
+
+                            <p>
+                                Discover the best career path based on your skills.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="why-feature">
+
+                        <div class="why-feature-icon">
+                            <i class="bi bi-mic"></i>
+                        </div>
+
+                        <div>
+                            <h5>Interview Preparation</h5>
+
+                            <p>
+                                Practice personalized interview questions.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section id="how-it-works" class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="display-5 fw-bold">
+
+                How It Works
+
+            </h2>
+
+            <p class="text-secondary">
+
+                Three simple steps to improve your career.
+
+            </p>
+
+        </div>
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="display-4 fw-bold text-primary mb-3">
+                        01
+                    </div>
+
+                    <h4>Upload Resume</h4>
+
+                    <p>
+                        Upload your latest resume in PDF format.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="display-4 fw-bold text-primary mb-3">
+                        02
+                    </div>
+
+                    <h4>AI Analysis</h4>
+
+                    <p>
+                        Receive ATS score, missing skills,
+                        AI review and career insights.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="display-4 fw-bold text-primary mb-3">
+                        03
+                    </div>
+
+                    <h4>Improve & Prepare</h4>
+
+                    <p>
+                        Follow your roadmap and prepare
+                        for interviews using AI.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="feature-card text-center p-5">
+
+            <h2 class="display-5 fw-bold">
+
+                Ready to Build Your Career?
+
+            </h2>
+
+            <p class="text-secondary mt-3">
+
+                Start your AI-powered career journey today.
+
+            </p>
+
+            <a href="/register"
+               class="btn btn-primary btn-lg mt-4 px-5">
+
+                Create Free Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

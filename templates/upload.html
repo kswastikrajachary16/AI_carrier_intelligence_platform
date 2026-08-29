@@ -1,0 +1,337 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+Upload Resume
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+
+    <div class="card shadow-lg mb-3">
+
+        <div class="card-body py-3 px-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h2 class="fw-bold mb-1">
+
+                        <i class="bi bi-cloud-arrow-up-fill text-primary me-2"></i>
+
+                        Upload Resume
+
+                    </h2>
+
+                    <p class="text-secondary mb-0">
+
+                        Upload your resume and unlock AI-powered career insights.
+
+                    </p>
+
+                </div>
+
+                <span class="badge bg-primary px-3 py-2">
+
+                    AI Resume Analysis
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="row gx-3 gy-3">
+
+        <!-- Left -->
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-3">
+
+                        Resume Upload
+
+                    </h4>
+
+                    <form method="POST"
+                          action="/upload"
+                          enctype="multipart/form-data">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Target Job Role
+
+                            </label>
+
+                            <select
+                                class="form-select"
+                                name="job_role"
+                                required>
+
+                                <option value="">
+
+                                    Select Role
+
+                                </option>
+
+                                <option>Java Full Stack Developer</option>
+
+                                <option>Python Developer</option>
+
+                                <option>Data Scientist</option>
+
+                                <option>AI Engineer</option>
+
+                                <option>Backend Developer</option>
+
+                                <option>Frontend Developer</option>
+
+                                <option>Full Stack Developer</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="upload-box rounded-4">
+
+                            <i class="bi bi-cloud-arrow-up-fill upload-icon"></i>
+
+                            <h4 class="mt-3">
+
+                                Drag & Drop Resume
+
+                            </h4>
+
+                            <p class="text-secondary mb-3">
+
+                                or choose a PDF from your computer
+
+                            </p>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                name="resume"
+                                accept=".pdf"
+                                required>
+
+                            <small class="text-secondary d-block mt-3">
+
+                                PDF files only • Maximum 5 MB
+
+                            </small>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 mt-3 py-3">
+
+                            <i class="bi bi-upload me-2"></i>
+
+                            Upload & Analyze
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow-lg mb-3">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">
+
+                        AI Analysis
+
+                    </h5>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        Resume Parsing
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        ATS Score
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        Skill Extraction
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        Career Prediction
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        Skill Gap Analysis
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        Learning Roadmap
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card shadow-lg">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">
+
+                        Resume Tips
+
+                    </h5>
+
+                    <div class="feature-item">
+
+                        📄 Keep it one page
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        🚀 Mention projects
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        💼 Add internships
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        📊 Quantify achievements
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        🤖 ATS Friendly Format
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.upload-box{
+
+    background:#111827;
+
+    border:2px dashed rgba(255,255,255,.12);
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.upload-box:hover{
+
+    border-color:#3b82f6;
+
+    background:#172033;
+
+}
+
+.upload-icon{
+
+    font-size:70px;
+
+    color:#3b82f6;
+
+}
+
+.feature-item{
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    padding:12px 15px;
+
+    border-radius:12px;
+
+    margin-bottom:10px;
+
+    transition:.25s;
+
+}
+
+.feature-item:hover{
+
+    background:#172033;
+
+    transform:translateX(4px);
+
+}
+
+.card{
+
+    margin-bottom:0;
+
+}
+
+</style>
+
+{% endblock %}

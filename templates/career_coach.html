@@ -1,0 +1,149 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+AI Career Coach
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>🎯 AI Career Coach</h2>
+
+    <p class="text-muted">
+        Get AI-powered career guidance based on your uploaded resume.
+    </p>
+
+    <hr>
+
+	{% if career_result %}
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-primary text-white">
+	        👤 Candidate Profile
+	    </div>
+
+	    <div class="card-body">
+	        {{ career_result.candidate_profile }}
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-success text-white">
+	        🎯 Best Career Roles
+	    </div>
+
+	    <div class="card-body">
+	        <ul>
+	            {% for role in career_result.best_roles %}
+	            <li>{{ role }}</li>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-info text-white">
+	        💪 Strengths
+	    </div>
+
+	    <div class="card-body">
+	        <ul>
+	            {% for item in career_result.strengths %}
+	            <li>{{ item }}</li>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-danger text-white">
+	        📚 Skills To Learn
+	    </div>
+
+	    <div class="card-body">
+	        <ul>
+	            {% for item in career_result.skills_to_learn %}
+	            <li>{{ item }}</li>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-warning">
+	        🛣️ Learning Roadmap
+	    </div>
+
+	    <div class="card-body">
+
+	        <p><strong>Month 1:</strong> {{ career_result.learning_roadmap.month_1 }}</p>
+
+	        <p><strong>Month 2:</strong> {{ career_result.learning_roadmap.month_2 }}</p>
+
+	        <p><strong>Month 3:</strong> {{ career_result.learning_roadmap.month_3 }}</p>
+
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-secondary text-white">
+	        📜 Recommended Certifications
+	    </div>
+
+	    <div class="card-body">
+	        <ul>
+	            {% for item in career_result.recommended_certifications %}
+	            <li>{{ item }}</li>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-dark text-white">
+	        🏢 Suggested Companies
+	    </div>
+
+	    <div class="card-body">
+	        <ul>
+	            {% for item in career_result.suggested_companies %}
+	            <li>{{ item }}</li>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-4">
+	    <div class="card-header bg-success text-white">
+	        💰 Expected Salary Range
+	    </div>
+
+	    <div class="card-body">
+	        {{ career_result.salary_range }}
+	    </div>
+	</div>
+
+
+	<div class="card shadow-sm mb-5">
+	    <div class="card-header bg-primary text-white">
+	        💬 Career Advice
+	    </div>
+
+	    <div class="card-body">
+	        {{ career_result.career_advice }}
+	    </div>
+	</div>
+
+	{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+Flask
+bcrypt
+psycopg2-binary
+groq
+pdfplumber
+requests
+python-dotenv

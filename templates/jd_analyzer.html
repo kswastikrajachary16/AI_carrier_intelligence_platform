@@ -1,0 +1,226 @@
+{% extends "layouts/sidebar.html" %}
+
+{% block title %}
+AI JD Analyzer
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">
+        📄 AI JD Analyzer
+    </h2>
+
+    <p class="text-muted">
+        Compare your uploaded resume with any Job Description using AI.
+    </p>
+
+    <hr>
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Paste Job Description
+            </label>
+
+            <textarea
+                class="form-control"
+                name="job_description"
+                rows="12"
+                placeholder="Paste the complete Job Description here..."
+                required></textarea>
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+            Analyze Job Description
+        </button>
+
+    </form>
+
+    {% if match_result %}
+
+    <hr class="mt-5">
+
+    <h2 class="mb-4">
+        🤖 AI JD Analysis Report
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5>🎯 Match Percentage</h5>
+
+                    <h2 class="text-primary">
+                        {{ match_result.match_percentage }}%
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5>📊 ATS Score</h5>
+
+                    <h2 class="text-success">
+                        {{ match_result.ats_score }}%
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-success text-white">
+                    ✅ Matching Skills
+                </div>
+
+                <div class="card-body">
+
+                    <ul>
+
+                        {% for skill in match_result.matching_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-danger text-white">
+                    ❌ Missing Skills
+                </div>
+
+                <div class="card-body">
+
+                    <ul>
+
+                        {% for skill in match_result.missing_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header bg-primary text-white">
+            💪 Strengths
+        </div>
+
+        <div class="card-body">
+
+            <ul>
+
+                {% for strength in match_result.strengths %}
+                    <li>{{ strength }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header bg-warning">
+            ⚠️ Weaknesses
+        </div>
+
+        <div class="card-body">
+
+            <ul>
+
+                {% for weakness in match_result.weaknesses %}
+                    <li>{{ weakness }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header bg-info text-white">
+            💡 AI Suggestions
+        </div>
+
+        <div class="card-body">
+
+            <ul>
+
+                {% for suggestion in match_result.suggestions %}
+                    <li>{{ suggestion }}</li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-primary mb-5">
+
+        <div class="card-header bg-primary text-white">
+            📝 Final Verdict
+        </div>
+
+        <div class="card-body">
+
+            <p class="mb-0">
+                {{ match_result.final_verdict }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
