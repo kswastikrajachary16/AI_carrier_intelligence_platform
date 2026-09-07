@@ -65,6 +65,8 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
 
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
 
 # ---------------- HOME ----------------
 
